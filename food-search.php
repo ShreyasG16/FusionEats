@@ -38,9 +38,10 @@ function calculate_weighted_score($tokens, $title, $description, $weights) {
         $lev_title = levenshtein($token, $title);
         $lev_desc = levenshtein($token, $description);
         $lev_score = max(
-            1 - ($lev_title / max(strlen($title), 1)),
-            1 - ($lev_desc / max(strlen($description), 1))
+            1 - ($lev_title / max(strlen($token), strlen($title), 1)),
+            1 - ($lev_desc / max(strlen($token), strlen($description), 1))
         );
+
 
         $soundex_token = soundex($token);
         $soundex_title = soundex($title);
